@@ -1,0 +1,13 @@
+name: kilt-components
+version: 0.1.0
+
+authors:
+  - Troy Sornson <troy@sornson.io>
+
+dependencies:
+  kilt:
+    github: jeromegn/kilt
+
+crystal: 1.1.1
+
+license: MIT
