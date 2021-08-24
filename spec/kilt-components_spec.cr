@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-Kilt::Component.import_components("spec/components")
+Kilt::Component.import_components("spec/fixture1")
 
 describe Kilt::Component do
   it "renders" do

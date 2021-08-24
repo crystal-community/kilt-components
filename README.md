@@ -21,7 +21,7 @@ This library uses [Kilt](https://github.com/jeromegn/kilt) as the underlying tem
 Start with a directory of components, where each subdirectory is considered one component. Each component directory contains two files, one being the crystal controller and the other being a template for the view of that component. Using the spec component library as an example:
 
 ```
-spec/components
+spec/fixture1/namespace
 ├── list
 │ ├── list.cr
 │ └── list.water
@@ -41,7 +41,7 @@ require "kilt-components"
 
 # This macro will import all components at this location.
 # Folder path passed in is the relative location to the root of all components
-Kilt::Component.import_components("spec/components")
+Kilt::Component.import_components("spec/fixture1")
 
 rendered = KiltComponentSpec::Root.new("My Project", "Summary of project").render
 ```
@@ -63,6 +63,12 @@ details
   <li>Profit</li>
 </ul>
 ```
+
+Every component is accessible to every other component through injected methods that wrap
+the constructor and a newly added `render` method. I.e. for component `root` above to
+access the `list` component, it would use the method `namespace_list(["item1", "item2", "etc"])`,
+which will return a string of that component's template rendered with whatever parameters
+are passed in.
 
 ## Contributors
 
