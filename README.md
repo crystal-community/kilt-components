@@ -2,7 +2,7 @@
 
 The goal of this library is to support a modular component library of ever nested templated components, to generate a static page that can be built from building block components.
 
-This library uses (Kilt)[https://github.com/jeromegn/kilt] as the underlying templating engine, and so Kilt supported templating languages should also be supported by this library. However, only ECR, Slang, Liquid, and Water have been tested so far.
+This library uses [Kilt](https://github.com/jeromegn/kilt) as the underlying templating engine, and so Kilt supported templating languages should also be supported by this library. However, only ECR, Slang, Liquid, and Water have been tested so far.
 
 ## Installation
 
