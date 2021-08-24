@@ -1,15 +1,16 @@
 module KiltComponentSpec
   class Root
     include Kilt::Component
-    @name = "My Project"
-    @summary = "Super cool, it is"
+
+    def initialize(@name : String, @summary : String)
+    end
 
     def items
       [
         "item1",
         "item2",
         "???",
-        "Profit"
+        "Profit",
       ]
     end
   end

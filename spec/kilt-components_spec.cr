@@ -4,7 +4,7 @@ Kilt::Component.import_components("spec/components")
 
 describe Kilt::Component do
   it "renders" do
-    KiltComponentSpec::Root.new.render.should eq "# My Project
+    KiltComponentSpec::Root.new("My Project", "Super cool, it is").render.should eq "# My Project
 --------------
 
 Super cool, it is
