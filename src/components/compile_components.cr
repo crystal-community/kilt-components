@@ -15,7 +15,10 @@ Dir.children(expanded).each do |component|
   lines = file.split("\n")
   lines.each_with_index do |line, i|
     if line.includes?("include Kilt::Component")
-      lines.insert(i + 1, "#{line.split(/\S/, 2)[0]}generate_render(\"#{expanded}/#{component}/#{template}\")")
+      leading_whitespace = line.split(/\S/, 2)[0]
+      lines.insert(i + 1, "#{leading_whitespace}generate_render(\"#{expanded}/#{component}/#{template}\")")
+      # lines.insert(i + 2, "def self.__component_name; \"#{component}\"; end")
+      lines.insert(i + 2, "#{leading_whitespace}COMPONENT__NAME = \"#{component}\"")
       break
     end
   end

@@ -9,8 +9,7 @@ module Kilt::Component
     {% verbatim do %}
     macro finished
       {% for c in Kilt::Component.includers %}
-        {% name = c.name.split("::")[-1].gsub(/[A-Z]/, "_\\0").gsub(/^_/, "").downcase.id %}
-        def {{name}}(*args)
+        def {{c.constant("COMPONENT__NAME").id}}(*args)
           {{c}}.new(*args).render
         end
       {% end %}

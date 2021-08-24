@@ -36,11 +36,11 @@ spec/components
     └── text.liquid
 ```
 
-
 ```crystal
 require "kilt-components"
 
-# This macro will import all components at this location. Folder path passed in is the relative location to the root of all components
+# This macro will import all components at this location.
+# Folder path passed in is the relative location to the root of all components
 Kilt::Component.import_components("spec/components")
 
 rendered = KiltComponentSpec::Root.new("My Project", "Summary of project").render
