@@ -1,9 +1,23 @@
 require "./spec_helper"
 
-describe Kilt::Components do
-  # TODO: Write tests
+Kilt::Component.import_components("spec/components")
 
-  it "works" do
-    false.should eq(true)
+describe Kilt::Component do
+  it "renders" do
+    KiltComponentSpec::Root.new.render.should eq "# My Project
+--------------
+
+Super cool, it is
+
+<h3>Description</h3>
+details
+
+<ul>
+  <li>item1</li>
+  <li>item2</li>
+  <li>???</li>
+  <li>Profit</li>
+</ul>
+"
   end
 end

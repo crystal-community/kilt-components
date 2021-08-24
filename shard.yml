@@ -8,6 +8,23 @@ dependencies:
   kilt:
     github: jeromegn/kilt
 
+development_dependencies:
+  crikey:
+    github: domgetter/crikey
+  crustache:
+    github: MakeNowJust/crustache
+  jbuilder:
+    github: shootingfly/jbuilder
+  liquid:
+    github: TechMagister/liquid.cr
+  slang:
+    github: jeromegn/slang
+  temel:
+    github: f/temel
+  water:
+    github: shootingfly/water
+
+
 crystal: 1.1.1
 
 license: MIT

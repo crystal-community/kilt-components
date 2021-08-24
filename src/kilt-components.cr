@@ -1,6 +1,9 @@
-# TODO: Write documentation for `Kilt::Components`
-module Kilt::Components
-  VERSION = "0.1.0"
+require "kilt"
 
-  # TODO: Put your code here
+module Kilt::Component
+  macro import_components(directory)
+    {% begin %}
+    {{ run("./components/compile_components", directory) }}
+    {% end %}
+  end
 end
