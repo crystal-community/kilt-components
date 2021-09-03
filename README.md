@@ -51,7 +51,7 @@ Where rendered is now the string containing
 # My Project
 --------------
 
-Super cool, it is
+Summary of project
 
 <h3>Description</h3>
 details
