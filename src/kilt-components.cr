@@ -1,4 +1,5 @@
 require "kilt"
+require "./component/component"
 
 module Kilt::Component
   macro generate_render(component)
