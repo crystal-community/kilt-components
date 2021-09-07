@@ -18,7 +18,7 @@ Dir.children(expanded).each do |namespace|
     lines.each_with_index do |line, i|
       if line.match(/include.*?Kilt::Component/)
         leading_whitespace = line.split(/\S/, 2)[0]
-        lines.insert(i + 1, "#{leading_whitespace}generate_render(\"#{expanded}/#{namespace}/#{component}/#{template}\")")
+        lines.insert(i + 1, "#{leading_whitespace}::Kilt::Component.generate_render(\"#{expanded}/#{namespace}/#{component}/#{template}\")")
         lines.insert(i + 2, "#{leading_whitespace}COMPONENT__NAME = \"#{namespace}_#{component}\"")
         break
       end

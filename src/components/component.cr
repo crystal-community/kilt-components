@@ -1,10 +1,4 @@
 module Kilt::Component
-  macro generate_render(component)
-    def render
-      Kilt.render({{component}})
-    end
-  end
-
   macro included
     {% verbatim do %}
     macro finished
