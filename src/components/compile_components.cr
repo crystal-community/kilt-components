@@ -1,6 +1,6 @@
-if File.exists?("#{Dir.current}/lib/kilt-compnonents/src/components/component.cr")
+if File.exists?("#{Dir.current}/lib/kilt-components/src/components/component.cr")
   # Pull in the component file if we're running as a shard
-  puts File.read("#{Dir.current}/lib/kilt-compnonents/src/components/component.cr")
+  puts File.read("#{Dir.current}/lib/kilt-components/src/components/component.cr")
 elsif File.exists?("#{Dir.current}/src/components/component.cr")
   # or directly from this project (probably running tests)
   puts File.read("#{Dir.current}/src/components/component.cr")
