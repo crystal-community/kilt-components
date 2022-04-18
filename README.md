@@ -31,9 +31,13 @@ spec/fixture1/namespace
 ├── section
 │ ├── section.cr
 │ └── section.slang
-└── text
-    ├── text.cr
-    └── text.liquid
+├── text
+|   ├── text.cr
+|   └── text.liquid
+└── component_list
+    ├── component_list.cr
+    └── component_list.liquid
+
 ```
 
 ```crystal
@@ -46,7 +50,21 @@ Kilt::Component.import_components("spec/fixture1")
 rendered = KiltComponentSpec::Root.new("My Project", "Summary of project").render
 ```
 
-Where rendered is now the string containing
+The initial `root.ecr` looks like:
+```crystal
+# <%= @name %>
+--------------
+
+<%= @summary %>
+
+<%= namespace_section("Description", "details").render %>
+
+<%= namespace_list(items).render %>
+
+<%= namespace_component_list([namespace_text("This is text"), namespace_text("This is more text")]).render %>
+```
+
+And the `rendered` string is now:
 ```
 # My Project
 --------------
@@ -62,13 +80,17 @@ details
   <li>???</li>
   <li>Profit</li>
 </ul>
+
+This is text
+This is more text
 ```
 
 Every component is accessible to every other component through injected methods that wrap
 the constructor and a newly added `render` method. I.e. for component `root` above to
 access the `list` component, it would use the method `namespace_list(["item1", "item2", "etc"])`,
-which will return a string of that component's template rendered with whatever parameters
-are passed in.
+which will return an instance of the component as if constructed through its `new` method with whatever parameters
+are passed in. A subsequent `render` call will convert that component into the string version for final
+display of the component.
 
 ## Contributors
 

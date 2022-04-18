@@ -3,6 +3,8 @@
 
 <%= @summary %>
 
-<%= namespace_section("Description", "details") %>
+<%= namespace_section("Description", "details").render %>
 
-<%= namespace_list(items) %>
+<%= namespace_list(items).render %>
+
+<%= namespace_component_list([namespace_text("This is text"), namespace_text("This is more text")]).render %>

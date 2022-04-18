@@ -18,6 +18,9 @@ details
   <li>???</li>
   <li>Profit</li>
 </ul>
+
+This is text
+This is more text
 "
   end
 end
