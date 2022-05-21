@@ -21,6 +21,15 @@ details
 
 This is text
 This is more text
-"
+
+
+There is no template with this component"
+  end
+
+  it "Correctly points to component in exceptions" do
+    KiltComponentSpec::ExceptionComponent.new.render
+    fail("Exception should have been thrown")
+  rescue e : Exception
+    e.backtrace[0].should eq "spec/fixture1/namespace/exception.cr:6:7 in 'raise_exc'"
   end
 end
