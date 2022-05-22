@@ -32,4 +32,13 @@ There is no template with this component"
   rescue e : Exception
     e.backtrace[0].should eq "spec/fixture1/namespace/exception.cr:6:7 in 'raise_exc'"
   end
+
+  it "Supports blocks in components" do
+    KiltComponentSpec::TestingBlock.new.render.should eq "<This>is the top level text</This>
+<This>is outer text</This>
+
+  <This>is inner text</This>
+<This>is more outer text</This>
+<And>this is the final text</And>"
+  end
 end

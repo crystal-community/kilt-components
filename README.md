@@ -89,8 +89,49 @@ Every component is accessible to every other component through injected methods 
 the constructor and a newly added `render` method. I.e. for component `root` above to
 access the `list` component, it would use the method `namespace_list(["item1", "item2", "etc"])`,
 which will return an instance of the component as if constructed through its `new` method with whatever parameters
-are passed in. A subsequent `render` call will convert that component into the string version for final
-display of the component.
+are passed in. If a direct render is desired, you can instead call `render_namespace_list(...)`.
+
+## Blocks
+
+New convenience methods were added so that blocks can be forwarded to the constructor of components
+that wish to wrap sub content on the fly:
+
+```crystal
+# namespace/blocked_component.cr
+class Blocked
+  include Kilt::Component
+
+  @child : Proc(String)
+
+  def initialize(&block : -> String)
+    @child = block
+  end
+end
+
+# namespace/blocked_component.slang
+div.my-class
+  == @child.call
+
+# namespace/some_other_component.slang
+== render_namespace_blocked_component do
+  p This is a paragraph rendered in a div with css "my-class"
+```
+
+Renders into:
+
+```html
+<div class="my-class">
+  <p>This is a paragraph rendered in a div with css "my-class"</p>
+</div>
+```
+
+## Features
+
+* Supports any templating language supported by [kilt](https://github.com/jeromegn/kilt)
+* Stitches together component templates to allow component re-use
+* Exceptions thrown by a component correctly point to the component file
+* All components have a namespace
+* Convenience methods to construct components with their arguments, supports blocks
 
 ## Contributors
 
