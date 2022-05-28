@@ -39,6 +39,7 @@ There is no template with this component"
 
   <This>is inner text</This>
 <This>is more outer text</This>
+37
 <And>this is the final text</And>"
   end
 end

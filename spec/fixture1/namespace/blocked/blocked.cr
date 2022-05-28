@@ -2,10 +2,10 @@ module KiltComponentSpec
   class Blocked
     include Kilt::Component
 
-    @child : Proc(String)
+    has_slot
 
-    def initialize(&block : -> String)
-      @child = block
+    def initialize(my_int : Int32)
+      @my_int = my_int
     end
   end
 end

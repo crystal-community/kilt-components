@@ -91,26 +91,23 @@ access the `list` component, it would use the method `namespace_list(["item1", "
 which will return an instance of the component as if constructed through its `new` method with whatever parameters
 are passed in. If a direct render is desired, you can instead call `render_namespace_list(...)`.
 
-## Blocks
+## Blocks (or Slots)
 
 New convenience methods were added so that blocks can be forwarded to the constructor of components
-that wish to wrap sub content on the fly:
+that wish to wrap sub content on the fly. These blocks are referred to as slots for the components:
 
 ```crystal
 # namespace/blocked_component.cr
 class Blocked
   include Kilt::Component
 
-  @child : Proc(String)
-
-  def initialize(&block : -> String)
-    @child = block
-  end
+  has_slot
 end
 
 # namespace/blocked_component.slang
 div.my-class
-  == @child.call
+  == render_slot # This raises an exception if the slot wasn't filled
+  == render_slot? # if no block is provided, this returns an empty string instead
 
 # namespace/some_other_component.slang
 == render_namespace_blocked_component do

@@ -1,4 +1,23 @@
 module Kilt::Component
+  macro has_slot
+    @_slot : Proc(String)? = nil
+
+    def render_slot?
+      return "" unless slot = @_slot
+      slot.call
+    end
+
+    def render_slot
+      raise "Slot not filled" unless slot = @_slot
+      slot.call
+    end
+
+    def initialize(*args, **props, &block : -> String)
+      initialize(*args, **props)
+      @_slot = block
+    end
+  end
+
   macro included
     {% verbatim do %}
     macro finished

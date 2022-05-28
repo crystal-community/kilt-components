@@ -1,3 +1,4 @@
 This is outer text
-== @child.call
+== render_slot
 This is more outer text
+= @my_int
