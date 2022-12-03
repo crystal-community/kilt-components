@@ -30,7 +30,7 @@ There is no template with this component"
     KiltComponentSpec::ExceptionComponent.new.render
     fail("Exception should have been thrown")
   rescue e : Exception
-    e.backtrace[0].should eq "spec/fixture1/namespace/exception.cr:6:7 in 'raise_exc'"
+    e.backtrace[0].should eq "spec/fixture1/namespace/exception/exception.cr:6:7 in 'raise_exc'"
   end
 
   it "Supports blocks in components" do

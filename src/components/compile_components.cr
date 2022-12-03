@@ -14,7 +14,7 @@ Dir.children(expanded).each do |namespace|
     candidates = Dir.children("#{expanded}/#{namespace}/#{component}") - ["#{component}.cr"]
     # TODO: need to actually inspect candidates and find one that is supported by Kilt
     template = candidates.first?
-    file_name = "#{expanded}/#{namespace}/#{component}.cr"
+    file_name = "#{expanded}/#{namespace}/#{component}/#{component}.cr"
     lines = file.split("\n")
     lines.insert(0, "#<loc:\"#{file_name}\",0,0>")
     lines.each_with_index do |line, i|
