@@ -22,20 +22,52 @@ module Kilt::Component
     {% verbatim do %}
     macro finished
       {% for c in Kilt::Component.includers %}
-        def {{c.constant("COMPONENT__NAME").id}}(*args, **kwargs)
-          {{c}}.new(*args, **kwargs).as(Kilt::Component)
+        macro {{c.constant("COMPONENT__NAME").id}}(*args, **kwargs, &block)
+          \{% if block %}
+            \{% if args.size > 0 && kwargs.size > 0 %}
+            {{c}}.new(\{{*args}}, \{{**kwargs}}) { \{{yield}} }.as(Kilt::Component)
+            \{% elsif args.size > 0 %}
+            {{c}}.new(\{{*args}}) { \{{yield}} }.as(Kilt::Component)
+            \{% elsif kwargs.size > 0 %}
+            {{c}}.new(\{{**kwargs}}) { \{{yield}} }.as(Kilt::Component)
+            \{% else %}
+            {{c}}.new \{{yield}}.as(Kilt::Component)
+            \{% end %}
+          \{% else %}
+            \{% if args.size > 0 && kwargs.size > 0 %}
+            {{c}}.new(\{{*args}}, \{{**kwargs}}).as(Kilt::Component)
+            \{% elsif args.size > 0 %}
+            {{c}}.new(\{{*args}}).as(Kilt::Component)
+            \{% elsif kwargs.size > 0 %}
+            {{c}}.new(\{{**kwargs}}).as(Kilt::Component)
+            \{% else %}
+            {{c}}.new.as(Kilt::Component)
+            \{% end %}
+          \{% end %}
         end
 
-        def render_{{c.constant("COMPONENT__NAME").id}}(*args, **kwargs)
-          {{c}}.new(*args, **kwargs).as(Kilt::Component).render
-        end
-
-        def {{c.constant("COMPONENT__NAME").id}}(*args, **kwargs, &block : -> String)
-          {{c}}.new(*args, **kwargs, &block).as(Kilt::Component)
-        end
-
-        def render_{{c.constant("COMPONENT__NAME").id}}(*args, **kwargs, &block : -> String)
-          {{c}}.new(*args, **kwargs, &block).as(Kilt::Component).render
+        macro render_{{c.constant("COMPONENT__NAME").id}}(*args, **kwargs, &block)
+          \{% if block %}
+            \{% if args.size > 0 && kwargs.size > 0 %}
+            {{c}}.new(\{{*args}}, \{{**kwargs}}) { \{{yield}} }.as(Kilt::Component).render
+            \{% elsif args.size > 0 %}
+            {{c}}.new(\{{*args}}) { \{{yield}} }.as(Kilt::Component).render
+            \{% elsif kwargs.size > 0 %}
+            {{c}}.new(\{{**kwargs}}) { \{{yield}} }.as(Kilt::Component).render
+            \{% else %}
+            {{c}}.new { \{{yield}} }.as(Kilt::Component).render
+            \{% end %}
+          \{% else %}
+            \{% if args.size > 0 && kwargs.size > 0 %}
+            {{c}}.new(\{{*args}}, \{{**kwargs}}).as(Kilt::Component).render
+            \{% elsif args.size > 0 %}
+            {{c}}.new(\{{*args}}).as(Kilt::Component).render
+            \{% elsif kwargs.size > 0 %}
+            {{c}}.new(\{{**kwargs}}).as(Kilt::Component).render
+            \{% else %}
+            {{c}}.new.as(Kilt::Component).render
+            \{% end %}
+          \{% end %}
         end
       {% end %}
       {% debug if flag?(:DEBUG) %}
